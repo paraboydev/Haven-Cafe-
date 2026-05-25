@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Haven Cafe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="cart-header">
+        <img src="images/cafelogo.png" alt="Haven Cafe Logo" class="logo">
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="cart.html" class="cart-link active">Cart</a>
+        </nav>
+        <div class="header-overlay"></div>
+        <div class="hero-content">
+            <h1>Your Cart</h1>
+            <p class="hero-subtitle">Review and checkout your order</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="cart-container">
+            <section class="cart-items-section">
+                <h2>Order Summary</h2>
+                <div class="cart-items">
+                    <div class="empty-cart-message">
+                        <p>Your cart is empty</p>
+                        <p style="font-size: 0.95rem; color: #666;">Browse our menu and add items to get started!</p>
+                        <a href="menu.html" class="cta-button">Browse Menu</a>
+                    </div>
+                </div>
+                <div id="cart-items-list"></div>
+            </section>
+
+            <aside class="cart-summary">
+                <h2>Cart Summary</h2>
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">₱0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Tax (10%):</span>
+                    <span id="tax">₱0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Delivery Fee:</span>
+                    <span id="delivery">₱99.00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span id="total">₱99.00</span>
+                </div>
+                <button class="checkout-btn" id="checkout-btn">Proceed to Checkout</button>
+                <a href="menu.html" class="continue-shopping">Continue Shopping</a>
+            </aside>
+        </div>
+    </main>
+
+    <script>
+        // Cart functionality
+        const DELIVERY_FEE = 99.00;
+
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsList = document.getElementById('cart-items-list');
+            const emptyCart = document.querySelector('.empty-cart-message');
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = '';
+                emptyCart.style.display = 'flex';
+                emptyCart.style.flexDirection = 'column';
+                emptyCart.style.alignItems = 'center';
+                emptyCart.style.padding = '3rem';
+                emptyCart.style.textAlign = 'center';
+                updateSummary([]);
+                return;
+            }
+
+            emptyCart.style.display = 'none';
+            cartItemsList.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <div class="item-info">
+                        <h3>${item.name}</h3>
+                        ${item.customizations ? `<span class="item-customizations">${item.customizations}</span>` : ''}
+                        <p class="item-price">₱${item.price.toFixed(2)}</p>
+                    </div>
+                    <div class="item-quantity">
+                        <button onclick="decreaseQuantity(${index})">-</button>
+                        <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)">
+                        <button onclick="increaseQuantity(${index})">+</button>
+                    </div>
+                    <div class="item-total">
+                        ₱${(item.price * item.quantity).toFixed(2)}
+                    </div>
+                    <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+                </div>
+            `).join('');
+
+            updateSummary(cart);
+        }
+
+        function updateQuantity(index, quantity) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            quantity = Math.max(1, parseInt(quantity) || 1);
+            cart[index].quantity = quantity;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        function increaseQuantity(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart[index].quantity += 1;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        function decreaseQuantity(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart[index].quantity > 1) {
+                cart[index].quantity -= 1;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                loadCart();
+            }
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        function updateSummary(cart) {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const tax = subtotal * 0.10;
+            const total = subtotal + tax + DELIVERY_FEE;
+
+            document.getElementById('subtotal').textContent = `₱${subtotal.toFixed(2)}`;
+            document.getElementById('tax').textContent = `₱${tax.toFixed(2)}`;
+            document.getElementById('total').textContent = `₱${total.toFixed(2)}`;
+
+            const checkoutBtn = document.getElementById('checkout-btn');
+            checkoutBtn.disabled = cart.length === 0;
+        }
+
+        document.getElementById('checkout-btn').addEventListener('click', () => {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length > 0) {
+                alert('Thank you for your order! This is a demo. In a real app, you would be redirected to payment.');
+                localStorage.removeItem('cart');
+                loadCart();
+            }
+        });
+
+        // Load cart on page load
+        loadCart();
+    </script>
+    <script src="transition.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haven Cafe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <img src="images/cafelogo.png" alt="Haven Cafe Logo" class="logo">
+        <nav class="navbar">
+            <a href="index.html" class="active">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="cart.html" class="cart-link">Cart</a>
+        </nav>
+        <div class="header-overlay"></div>
+        <div class="hero-content">
+            <h1>Coffee. Comfort. Community.</h1>
+            <p class="hero-subtitle">Crafted for moments that matter</p>
+            <a href="menu.html" class="hero-cart-btn">Start Ordering</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Featured Selection Section -->
+        <section class="featured-section">
+            <h2 class="section-title">Best Seller</h2>
+            <div class="featured-grid">
+                <div class="featured-item">
+                    <img src="images/Matcha latte.jpg" alt="Matcha Latte">
+                    <h3>Matcha Latte</h3>
+                    <p>Green and energizing, served warm or iced.</p>
+                    <span class="price">₱180.00</span>
+                    <button type="button" class="cta-button" onclick="redirectToMenu('Matcha Latte')">Add to Cart</button>
+                </div>
+                <div class="featured-item">
+                    <img src="images/clubhouse.JPG" alt="Clubhouse Sandwich">
+                    <h3>Clubhouse Sandwich</h3>
+                    <p>Hearty sandwich layered with turkey, bacon, and greens.</p>
+                    <span class="price">₱220.00</span>
+                    <button type="button" class="cta-button" onclick="redirectToMenu('Clubhouse Sandwich')">Add to Cart</button>
+                </div>
+                <div class="featured-item">
+                    <img src="images/p1.jpg" alt="Chocolate Croissant">
+                    <h3>Chocolate Croissant</h3>
+                    <p>Rich and flaky pastry with a decadent chocolate center.</p>
+                    <span class="price">₱130.00</span>
+                    <button type="button" class="cta-button" onclick="redirectToMenu('Chocolate Croissant')">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coffee Forward Section -->
+        <section class="coffee-forward-section">
+            <div class="coffee-forward-content">
+                <div class="coffee-forward-text">
+                    <h2>Coffee. Forward.</h2>
+                    <p>We carefully source only specialty grade coffee beans from ethical roasters who observe the
+                        highest standards to ensure that each cup of coffee reaches its potential.</p>
+                    <p>We are dedicated to constantly educating ourselves and making beverages that put our coffee at
+                        the forefront.</p>
+                    <a href="menu.html" class="forward-link">Menu</a>
+                </div>
+                <div class="coffee-forward-image">
+                    <img src="images/pic1.jpg" alt="Coffee brewing process">
+                </div>
+            </div>
+        </section>
+
+
+
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-branding">
+                        <h3>HAVEN CAFE</h3>
+                    </div>
+                    <div class="footer-info">
+                        <p>551 M.F. Jhocson Street, Sampaloc</p>
+                        <p>1008 Metro Manila, Philippines</p>
+                    </div>
+                </div>
+                <div class="footer-contact">
+                    <p><a href="tel:+639198942979" class="phone-link">+639198942979</a></p>
+                    <p><a href="mailto:havencafe@gmail.com">havencafe@gmail.com</a></p>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            function redirectToMenu(itemName) {
+                const params = new URLSearchParams();
+                params.set('item', itemName);
+                window.location.href = `menu.html?${params.toString()}`;
+            }
+        </script>
+        <script src="transition.js"></script>
+</body>
+
+</html>

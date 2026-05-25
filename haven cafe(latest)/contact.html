@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Haven Cafe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="contact-header">
+        <img src="images/cafelogo.png" alt="Haven Cafe Logo" class="logo">
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="about.html">About</a>
+            <a href="contact.html" class="active">Contact</a>
+            <a href="cart.html" class="cart-link">Cart</a>
+        </nav>
+        <div class="header-overlay"></div>
+        <div class="hero-content">
+            <h1>Get In Touch</h1>
+            <p class="hero-subtitle">We'd love to hear from you</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="main-content contact-content">
+            <div class="contact-grid">
+                <section class="contact-info">
+                    <h2>Contact Information</h2>
+
+                    <div class="info-item">
+                        <h3>Address</h3>
+                        <p>551 M.F. Jhocson Street, Sampaloc</p>
+                        <p>1008 Metro Manila, Philippines</p>
+                    </div>
+
+                    <div class="info-item">
+                        <h3>Phone</h3>
+                        <p><a href="tel:+639198942979">+639198942979</a></p>
+                    </div>
+
+                    <div class="info-item">
+                        <h3>Email</h3>
+                        <p><a href="mailto:havencafe@gmail.com">havencafe@gmail.com</a></p>
+                    </div>
+
+                    <div class="info-item">
+                        <h3>Hours</h3>
+                        <p>
+                            Monday - Friday: 7:00 AM - 8:00 PM<br>
+                            Saturday: 8:00 AM - 9:00 PM<br>
+                            Sunday: 8:00 AM - 7:00 PM
+                        </p>
+                    </div>
+
+                    <div class="social-links">
+                        <h3>Follow Us</h3>
+                        <a href="#" class="social-link">Instagram</a>
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Twitter</a>
+                    </div>
+                </section>
+
+                <section class="contact-form-section">
+                    <h2>Send us a Message</h2>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                        </div>
+
+                        <button type="submit" class="cta-button">Send Message</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </main>
+    <script src="transition.js"></script>
+</body>
+
+</html>
